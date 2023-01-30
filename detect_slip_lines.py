@@ -200,11 +200,13 @@ def detect_lines(
 
 
 # Writes slopes to a file
-def write_slope(slopes):
-    with open("./slopes.txt", "w") as file:
-        for item in slopes:
-            # write each item on a new line
-            file.write(f"{item[0]:.4f}\n")
+def write_slope(lines, slopes):
+    with open("./lines_slopes.txt", "w") as file:
+        for item, slope in zip(lines, slopes):
+            # write each item on a new line: coords, slope
+            x1,y1,x2,y2 = item
+            file.write(f"{x1, y1, x2, y2}  ")
+            file.write(f"{slope[0]:.4f}\n")
 
 
 # plots the image with lines
@@ -250,7 +252,7 @@ def main(args):
     # mask regions of interest
     maskimage = region_of_interest(p1, p2, p3, input_image)
     # detect lines, return slopes and image with lines
-    img, slopes = detect_lines(
+    img, lines, slopes = detect_lines(
         maskimage,
         p1,
         p2,
@@ -265,7 +267,7 @@ def main(args):
         atol_m=5,
     )
     # write slopes to file
-    write_slope(slopes)
+    write_slope(lines, slopes)
     # plot the image with lines
     plot_image(img)
 
