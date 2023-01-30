@@ -11,9 +11,9 @@
 module load cuda/11.2
 module load cudnn/8.2.1
 
-
+# activate the environment
 source ~/.zshrc
-conda activate tensor_new
+conda activate tensorflow_opencv2
 
 # set environmental variables
 export RANK=${SLURM_PROCID}

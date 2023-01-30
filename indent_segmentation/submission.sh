@@ -5,10 +5,13 @@ program=$localDir/training.py
 run_file=$localDir/run_file.sh
 submit_file=$localDir/sub_file.sh
 
+# create a file to write the Grid search results
 rm post_output
 echo -n >post_output
 
+# Batch size for 1 GPU
 bs=16
+# epochs
 epochs=200
 
 # Grid submission for input arguments
@@ -37,14 +40,14 @@ for augment in  0 1
 
         fi
 
-	    	# adapting run file
+	    	# adapting run file to arguments
     		sed -e "s|tag_program|${program}|g" ${run_file}  |\
         	sed -e "s/\<tag_epoch\>/${epochs}/g"| \
         	sed -e "s/\<tag_batch\>/${bs}/g"| \
 			sed -e "s/\<tag_lr\>/${lr}/g"| \
 			sed -e "s/\<tag_count\>/${count}/g"| \
         	sed -e "s/\<tag_aug\>/${augment}/g" > script.sh
-			# submit
+			# adapting submit file to arguments
 			sed -e "s/\<tag_task\>/${tasks}/g" ${submit_file} > submit.sh
 			sbatch submit.sh
 

@@ -9,16 +9,7 @@ from tensorflow.keras.optimizers import Adam
 import glob
 import argparse
 import time
-from models import build_unet
-
-
-# print("Num GPUs Available: ", len(tf.config.list_physical_devices("GPU")))
-
-
-# device_name = tf.test.gpu_device_name()
-# if device_name != "/device:GPU:0":
-#     raise SystemError("GPU device not found")
-# print("Found GPU at: {}".format(device_name))
+from indent_segmentation.models import build_unet
 
 
 def dice_coef(y_true, y_pred, smooth=1.0):
@@ -45,7 +36,6 @@ def get_datasets(args, test_size=0.2):
     image_names = glob.glob(args.image_dir + "/*.png")
     image_names.sort()
     image_subset = image_names[0:]
-
 
     mask_names = glob.glob(args.mask_dir + "/*.png")
     mask_names.sort()
@@ -84,7 +74,7 @@ def process_tensor(img_path, mask_path):
     input_mask = tf.image.resize_with_pad(
         input_mask, 768, 1024, antialias=False
     )
-    #input_mask = tf.cast(input_mask > 0.2, tf.int8)
+    # input_mask = tf.cast(input_mask > 0.2, tf.int8)
 
     return input_image, input_mask
 

@@ -1,6 +1,6 @@
 #!/usr/local_rwth/bin/zsh
 
-# run training
+# run training with the given input args
 python -W ignore tag_program  \
 --global_batch_size=tag_batch \
 --lr=tag_lr \

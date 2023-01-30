@@ -137,6 +137,26 @@ def detect_lines(
     atol_p=30,
     atol_m=5,
 ):
+    """
+    Returns an image with detected lines, the line coordinates, line slopes.
+
+            Parameters:
+                    img (img): The input image with rectagular regions of interest
+                    p1,p2,p3 (numpy array): 3 numpy arrays containing the coordinates of 3 rectangular regions
+                    gauss_k (int-odd only): Gaussian Blurring degree, common values: 5, 7, 9, the higher the lower detected lines
+                    low_th (int): lower threshold for detecting lines
+                    high_th (int): higher threshold for detecting lines, the higher the more lines
+                    min_vote (int): min number of votes to pass as line, the higher the more conservative the line detection
+                    min_line_length (int): min allowable detected line length, depending on the slip lines
+                    max_line_gap (int): max allowable gap in the line segment detected.
+                    atol_p (int): tolerance for removing lines with end-point close to rectangle corners, roughly >30 and <70
+                    atol_m (int): tolerance for removing lines close in slope to rectangle edges, roughly >5 and <10
+
+            Returns:
+                    image with line drawn (img)
+                    line segment endpoint coordinates (list)
+                    line slopes (list)
+    """
     sl, points = region_sl_coords(p1, p2, p3)
     rho = 1
     theta = np.pi / 180
@@ -176,7 +196,7 @@ def detect_lines(
             x1, y1, x2, y2 = line
             cv2.line(img, (x1, y1), (x2, y2), (255, 255, 255), 3)
 
-    return img, slopes
+    return img, true_lines, slopes
 
 
 # Writes slopes to a file
