@@ -6,7 +6,7 @@ import argparse
 from tensorflow.keras.models import load_model
 import matplotlib.pyplot as plt
 
-
+# Preprocess the image as it was during the model training
 def preprocess(image_address):
     raw_im = tf.io.read_file(image_address)
     image = tf.image.decode_png(raw_im, channels=1)
@@ -20,7 +20,7 @@ def preprocess(image_address):
 
 import cv2
 
-
+# Using contouring and approximation find the corners of the indent triangle
 def find_corners(prediction):
     gray = cv2.GaussianBlur(prediction, (7, 7), 0)
     # Find the contours
@@ -41,6 +41,7 @@ def find_corners(prediction):
     return corner
 
 
+# Find the coordinates of rectangle corners on the edges of the triangle
 def edge_quad_points(corners, H=100):
 
     # sort on basis of x component
@@ -91,6 +92,7 @@ def edge_quad_points(corners, H=100):
     return points_1, points_2, points_3
 
 
+# Create a mask for regions of interest
 def region_of_interest(p1, p2, p3, input_img):
 
     blank = np.zeros(input_img.shape[:2], dtype="uint8")
@@ -103,6 +105,7 @@ def region_of_interest(p1, p2, p3, input_img):
     return maskimage
 
 
+# Given the coordinates of rectangles, output the slopes of rectangle lines and coordinate as numpy arrays
 def region_sl_coords(p1, p2, p3):
     coords = []
     slopes = []
@@ -119,6 +122,7 @@ def region_sl_coords(p1, p2, p3):
     return np.concatenate(slopes), np.concatenate(coords)
 
 
+# Detect lines in regions of interest, removes the lines belonging to the recatngles with some tolerance
 def detect_lines(
     img,
     p1,
@@ -175,6 +179,7 @@ def detect_lines(
     return img, slopes
 
 
+# Writes slopes to a file
 def write_slope(slopes):
     with open("./slopes.txt", "w") as file:
         for item in slopes:
@@ -182,6 +187,7 @@ def write_slope(slopes):
             file.write(f"{item[0]:.4f}\n")
 
 
+# plots the image with lines
 def plot_image(image):
     plt.figure(figsize=(10, 7))
     plt.imshow(image, cmap="gray")
@@ -265,9 +271,3 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     main(args)
-
-
-# args = parser.parse_args()
-
-# main(args)
-
