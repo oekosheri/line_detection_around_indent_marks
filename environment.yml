@@ -1,0 +1,13 @@
+name: tensorflow-opencv2
+channels:
+  - defaults
+dependencies:
+  - python=3.8
+  - matplotlib
+  - pandas
+  - black
+  - pip
+  - pip:
+    - opencv-python==4.5.5.62
+    - tensorflow==2.7.0
+

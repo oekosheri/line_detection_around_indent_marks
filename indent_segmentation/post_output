@@ -1,0 +1,76 @@
+
+GPU: 2 LR: 0.001 Augment: 0 count: 1
+
+IoU = 0.9446, dice score= 0.9715, train time= 2174.7632, test time= 2.9090 
+
+GPU: 1 LR: 0.001 Augment: 0 count: 1
+
+IoU = 0.9542, dice score= 0.9766, train time= 4047.5503, test time= 2.0044 
+
+GPU: 2 LR: 0.001 Augment: 0 count: 1
+
+IoU = 0.8816, dice score= 0.9371, train time= 2168.3804, test time= 2.9145 
+
+GPU: 2 LR: 0.0001 Augment: 0 count: 1
+
+IoU = 0.9200, dice score= 0.9583, train time= 2170.9055, test time= 2.9406 
+
+GPU: 1 LR: 0.001 Augment: 0 count: 1
+
+IoU = 0.9365, dice score= 0.9672, train time= 4031.0356, test time= 1.9459 
+
+GPU: 1 LR: 0.0001 Augment: 0 count: 1
+
+IoU = 0.9539, dice score= 0.9764, train time= 4030.8084, test time= 1.9665 
+
+GPU: 2 LR: 0.001 Augment: 0 count: 2
+
+IoU = 0.9799, dice score= 0.9898, train time= 4119.7138, test time= 2.9088 
+
+GPU: 2 LR: 0.0001 Augment: 0 count: 2
+
+IoU = 0.9646, dice score= 0.9820, train time= 4133.4888, test time= 3.0050 
+
+GPU: 1 LR: 0.001 Augment: 0 count: 2
+
+IoU = 0.9833, dice score= 0.9916, train time= 7814.0083, test time= 1.9570 
+
+GPU: 1 LR: 0.0001 Augment: 0 count: 2
+
+IoU = 0.9831, dice score= 0.9915, train time= 7816.6621, test time= 1.9574 
+
+GPU: 2 LR: 0.0001 Augment: 1 count: 1
+
+IoU = 0.8792, dice score= 0.9357, train time= 2282.4291, test time= 3.0558 
+
+GPU: 2 LR: 0.001 Augment: 1 count: 1
+
+IoU = 0.7815, dice score= 0.8774, train time= 2279.0538, test time= 3.0533 
+
+GPU: 1 LR: 0.001 Augment: 1 count: 1
+
+IoU = 0.8684, dice score= 0.9295, train time= 4178.4369, test time= 1.9528 
+
+GPU: 2 LR: 0.001 Augment: 1 count: 2
+
+IoU = 0.9165, dice score= 0.9564, train time= 4304.0115, test time= 3.0674 
+
+GPU: 1 LR: 0.001 Augment: 1 count: 2
+
+IoU = 0.9324, dice score= 0.9650, train time= 8043.6415, test time= 1.9659 
+
+GPU: 1 LR: 0.0001 Augment: 1 count: 1
+
+IoU = 0.8272, dice score= 0.9054, train time= 4206.2864, test time= 1.9679 
+
+GPU: 1 LR: 0.0001 Augment: 1 count: 2
+
+IoU = 0.9029, dice score= 0.9490, train time= 8102.7405, test time= 1.9830 
+
+GPU: 2 LR: 0.0001 Augment: 1 count: 1
+
+IoU = 0.8581, dice score= 0.9236, train time= 2294.6406, test time= 3.0998 
+
+GPU: 2 LR: 0.0001 Augment: 1 count: 2
+
+IoU = 0.9236, dice score= 0.9603, train time= 4303.6738, test time= 3.0718 
