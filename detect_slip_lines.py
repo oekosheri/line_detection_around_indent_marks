@@ -1,4 +1,5 @@
 import os, sys
+import re
 import numpy as np
 import cv2
 import tensorflow as tf
@@ -128,13 +129,13 @@ def detect_lines(
     p1,
     p2,
     p3,
-    gauss_k=5,
-    low_th=1,
-    high_th=100,
-    min_vote=50,
-    min_line_length=30,
-    max_line_gap=15,
-    atol_p=30,
+    gauss_k=7,
+    low_th=30,
+    high_th=70,
+    min_vote=70,
+    min_line_length=50,
+    max_line_gap=10,
+    atol_p=40,
     atol_m=5,
 ):
     """
@@ -142,15 +143,29 @@ def detect_lines(
 
             Parameters:
                     img (img): The input image with rectagular regions of interest
-                    p1,p2,p3 (numpy array): 3 numpy arrays containing the coordinates of 3 rectangular regions
-                    gauss_k (int-odd only): Gaussian Blurring degree, common values: 5, 7, 9, the higher the lower detected lines
-                    low_th (int): lower threshold for detecting lines
-                    high_th (int): higher threshold for detecting lines, the higher the more lines
-                    min_vote (int): min number of votes to pass as line, the higher the more conservative the line detection
-                    min_line_length (int): min allowable detected line length, depending on the slip lines
-                    max_line_gap (int): max allowable gap in the line segment detected.
-                    atol_p (int): tolerance for removing lines with end-point close to rectangle corners, roughly >30 and <70
-                    atol_m (int): tolerance for removing lines close in slope to rectangle edges, roughly >5 and <10
+                    p1,p2,p3 (numpy array): 3 numpy arrays containing the endpoints
+                    of 3 rectangular regions
+
+                    gauss_k (int-odd only): Gaussian Blurring degree, common values: 5, 7, 9,
+                    the higher the lower the detected lines
+
+                    low_th (int): lower threshold for detecting edges/lines, the higher the fewer lines
+
+                    high_th (int): higher threshold for detecting lines, the higher the fewer lines
+
+                    min_vote (int): min number of votes to pass as line, the higher the more
+                    conservative the line detection
+
+                    min_line_length (int): min allowable detected line length,
+                    depending on the slip lines
+
+                    max_line_gap (int): max allowable gap in the line segment detected, default:10
+
+                    atol_p (int): tolerance for removing lines with end-point close to rectangle corners,
+                    roughly >=30 and <70
+
+                    atol_m (int): tolerance for removing lines close in slope to rectangle edges,
+                    roughly >=5 and <10
 
             Returns:
                     image with line drawn (img)
@@ -204,7 +219,7 @@ def write_slope(lines, slopes):
     with open("./lines_slopes.txt", "w") as file:
         for item, slope in zip(lines, slopes):
             # write each item on a new line: coords, slope
-            x1,y1,x2,y2 = item
+            x1, y1, x2, y2 = item
             file.write(f"{x1, y1, x2, y2}  ")
             file.write(f"{slope[0]:.4f}\n")
 
@@ -227,17 +242,16 @@ def main(args):
 
     model = load_model((args.model_path + "/" + file_name), compile=False)
 
-    # list images in image_dir
-    files = os.listdir(args.image_dir)
-    # print(files)
-    # sys.stdout.flush()
-    # randomly pick an image
-    num = np.random.randint(1, len(files))
-    # preprocess
-    print(args.image_dir + "/" + files[num])
-    sys.stdout.flush()
+    # # list images in image_dir
+    # files = os.listdir(args.image_dir)
 
-    input_image = preprocess(args.image_dir + "/" + files[num])
+    # # randomly pick an image
+    # num = np.random.randint(1, len(files))
+    # # preprocess
+    # print(args.image_dir + "/" + files[num])
+    # sys.stdout.flush()
+
+    input_image = preprocess(args.image_path)
     # run inference
     prediction = (model.predict(input_image) > 0.5).astype(np.uint8)
     # reshape prediction
@@ -279,10 +293,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="slip line args")
 
     parser.add_argument(
-        "--image_dir",
-        type=str,
-        help="path to images",
-        default=str(os.environ["WORK"]) + "/images_collective",
+        "--image_path", type=str, help="path to images", required=True
     )
     parser.add_argument(
         "--model_path", type=str, help="path to model", required=True
