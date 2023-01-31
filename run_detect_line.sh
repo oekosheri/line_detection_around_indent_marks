@@ -7,7 +7,7 @@ conda activate tensor_new
 export CUDA_VISIBLE_DEVICES=""
 
 echo $CUDA_VISIBLE_DEVICES
-# run detect line image and model path need to change to your paths
+# run detect slip line: image and model path need to change to your paths
 python -W ignore ./detect_slip_lines.py  \
 --image_path $WORK/images_collective/leo1_1.png \
 --model_path ./indent_segmentation/sub_010.0012 \
