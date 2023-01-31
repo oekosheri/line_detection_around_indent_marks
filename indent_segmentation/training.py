@@ -31,6 +31,7 @@ def jaccard_coef(y_true, y_pred, smooth=1.0):
     )
 
 
+# Build tensorflow datasets
 def get_datasets(args, test_size=0.2):
 
     image_names = glob.glob(args.image_dir + "/*.png")
@@ -59,6 +60,7 @@ def get_datasets(args, test_size=0.2):
     return train_ds, val_ds
 
 
+# pre-process the datasets
 def process_tensor(img_path, mask_path):
 
     raw_im = tf.io.read_file(img_path)
@@ -79,6 +81,7 @@ def process_tensor(img_path, mask_path):
     return input_image, input_mask
 
 
+# simple augmentation: brightness/contrast
 def augment(image, mask):
 
     # deterministic flip
@@ -95,6 +98,7 @@ def augment(image, mask):
     return image, mask
 
 
+# configure the datasets for performance
 def configure_for_performance(ds, batch_size, augmentation=False, options=True):
     if options:
         options_shard = tf.data.Options()
@@ -118,6 +122,7 @@ def configure_for_performance(ds, batch_size, augmentation=False, options=True):
     return ds
 
 
+# testing the model and writing metrics
 def test(model, ds_test):
 
     # true y from validation dataset
