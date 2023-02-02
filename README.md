@@ -3,6 +3,7 @@ This package aims at detecting [slip lines](https://en.wikipedia.org/wiki/Slip_b
 
 The [indent segmentation](https://github.com/oekosheri/line_detection_around_indent_marks/tree/main/indent_segmentation) runs a semnatic segmentation model on high performance computing cluster (HPC) with the goal of finding the best model to detect the indent mark. For details of this part I refer you to [README](https://github.com/oekosheri/line_detection_around_indent_marks/tree/main/indent_segmentation/README.md).
 
+
 ## Create the righ environment
 The first step to use the line dtection code is to create the needed environment:
 ```
@@ -13,9 +14,14 @@ conda activate tensorflow-opencv2
 You could run the line detection file either locally or on the computer cluster.
 To run it in a Terminal (ex. Linux), frist edit [run_detect_line.sh](./run_detect_line.sh) and change the address to the input image and the best model. Then run the file:
 ```
-Zsh ./run_detect_line.sh
+zsh ./run_detect_line.sh
 ```
-or directly run the python file []
+or directly run the python file [detect_slip_lines.py](detect_slip_lines.py) with its input arguments.
+
+The only function whose parameters need changing until you get the lines of interest is [detect_lines](https://github.com/oekosheri/line_detection_around_indent_marks/blob/904bec8f5b3efc277bf20d005a0350e0ee77f460/detect_slip_lines.py#L127-L214) for which a detailed docstring was written.
+After running this file an image with detected lines on regions of interest will appear and the line coordinates and slopes will be written to a text file.
+
+
 
 
 
