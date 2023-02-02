@@ -21,7 +21,7 @@ or directly run the python file [detect_slip_lines.py](detect_slip_lines.py) wit
 The only function whose parameters need changing until you get the lines of interest is [detect_lines](https://github.com/oekosheri/line_detection_around_indent_marks/blob/904bec8f5b3efc277bf20d005a0350e0ee77f460/detect_slip_lines.py#L127-L214) for which a detailed docstring was written.
 After running this file an image with detected lines on regions of interest will appear and the line coordinates and slopes will be written to a text file.
 
-Below you will see an example after line detection. On the left you have the input image and on the right image after line detection on the regions of interest around the indent mark. To get more/less lines djust theparameters to the function listed above.
+Below you will see an example after line detection. On the left you have the input image and on the right image after line detection on the regions of interest around the indent mark. To get more/less lines adjust the parameters to the function listed above.
 
 <img src="./image.png" width="80%" height="80%">
 
