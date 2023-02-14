@@ -22,7 +22,7 @@ We also noticed repeating the training dataset increases the performance (count 
 
 Below you will see the performance of the best model according to [post_output](post_output):
 
-<img src="./image.png" width="80%" height="80%">
+<img src="./image_1.png" width="80%" height="80%">
 
 
 
