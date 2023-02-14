@@ -18,7 +18,7 @@ Aside from data and model parameters, there is a GPU number parameter in the gri
 ### Results
 
 The [Post_output](post_output) file created during submission and running the training, writes the metrics of the model for each set of parameters used. The current file shows the metrics from our run on our HPC cluster at [RWTH ITC](https://help.itc.rwth-aachen.de/). Each node has two GPUs on our cluster. The results show a minor decrease in metrics when two GPUs are used but the training time is almost halved.
-We alos noticed repeating the training dataset increases the performance (count parameter), however augemntation as we implemented it (brighness/contrast change), did not help the performnce of the model.
+We also noticed repeating the training dataset increases the performance (count parameter), however augemntation as we implemented it (brighness/contrast change), did not help the performnce of the model.
 
 
 
